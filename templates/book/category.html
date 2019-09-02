@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for cat in category %}
+
+<ul class="list-group">
+ <li class="list-group-item list-group-item-success">{{ cat.cat_name }}</li>
+
+ <!-- <li class="list-group-item list-group-item-secondary">Secondary item</li>
+ <li class="list-group-item list-group-item-info">Info item</li>
+ <li class="list-group-item list-group-item-warning">Warning item</li>
+ <li class="list-group-item list-group-item-danger">Danger item</li>
+ <li class="list-group-item list-group-item-primary">Primary item</li>
+ <li class="list-group-item list-group-item-dark">Dark item</li>
+ <li class="list-group-item list-group-item-light">Light item</li> -->
+
+{% endfor %}
+ <a href="{% url 'add-category' %}" class="btn btn-primary">add</a>
+</ul>
+{% endblock %}
