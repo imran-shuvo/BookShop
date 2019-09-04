@@ -43,7 +43,7 @@ def show_category(request):
 
 def add_book(request):
     if(request.method == 'POST'):
-        form =  AddBook(request.POST)
+        form =  AddBook(request.POST,request.FILES)
         form.save()
         return redirect('add-book')
     else :

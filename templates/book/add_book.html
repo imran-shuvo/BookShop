@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<form class="form-horizontal" method="post">
+<form class="form-horizontal" enctype="multipart/form-data" method="post">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit" class="btn btn-primary">Add</button>
