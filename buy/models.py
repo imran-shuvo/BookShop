@@ -6,7 +6,7 @@ class BuyRecord(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(BookInfo, on_delete=models.CASCADE)
     amount = models.IntegerField()
-    date = models.DateTimeField(default=datetime.now, blank=True)
+    date = models.DateTimeField(auto_now_add=True, blank=True)
     total = models.IntegerField()
 
 

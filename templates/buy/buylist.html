@@ -2,6 +2,9 @@
 {% block content %}
 
 {% for x in buys %}
+<form class="form"  method="post">
+
+
 <div class="card">
 <table class="table table-hover shopping-cart-wrap">
 <thead class="text-muted">
@@ -41,7 +44,9 @@
 	<td>
 		<div class="price-wrap">
 			<!-- <var class="price">USD 145</var> -->
-      <var class="price">{{x.book_price}} taka</var>
+      <var class="price">  <input readonly value="{{ x.id }} taka"></var>
+      <input readonly value="{{t_price }} taka">
+
 
 
 
@@ -65,8 +70,10 @@
 </div>
 
 
-<a href="{% url 'checkout' %}" class="btn btn-outline-success">Checkout</a>
+<a href="{% url 'checkout' %}" type="submit" class="btn btn-outline-success">Checkout</a>
 
 
+
+</form>
 
 {% endblock %}

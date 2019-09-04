@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- {% for x in buys %} -->
+<form class="form-horizontal" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <!-- <input type="text" name="book" value="{{ x.book_name }}">
+  <input type="text" name="user" value="{{ user.username }}">
+  <input type="text" name="amount" value="">
+
+
+  <input type="text" name="amount" value="{{ t_price }}"> -->
+<!--
+  <br>
+  <input type="text" name="name" value="">
+  <input type="text" name="user" value="">
+  <input type="text" name="amount" value="">
+  <input type="text" name="total" value="">
+
+  <button type="submit" >Save</button> -->
+
+
+
+
+</form>
+<!-- {% endfor %} -->
+
+{% endblock %}

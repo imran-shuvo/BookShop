@@ -3,10 +3,25 @@ from django.shortcuts import render,redirect
 from book.models import BookInfo
 
 
+
 mylist = []
 # def xfunc(myst = [], *args):
 #     mylist = myst
 #     return 1
+
+def save_record(request):
+    print(request.POST)
+    if request.method == 'POST':
+        print(request.POST)
+        return redirect('record')
+    else :
+        return render(request,'buylist1')
+
+
+
+
+
+
 
 
 
@@ -34,7 +49,7 @@ def buy_list(request):
         buys.append(buy)
 
     context = { 'buys': buys,'t_price':t_price }
-    return render(request,'buy/buylist.html',context)
+    return render(request,'buy/buylist1.html',context)
 
 def check_out(request):
     del_cart(True)
