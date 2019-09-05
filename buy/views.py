@@ -1,6 +1,11 @@
 from django.shortcuts import render,redirect
 # from  .models import BuyBook
 from book.models import BookInfo
+from .forms import AddBuyRecord
+from  .models import BuyRecord
+
+from django.contrib.auth.models import User
+
 
 
 
@@ -11,11 +16,40 @@ mylist = []
 
 def save_record(request):
     print(request.POST)
+
     if request.method == 'POST':
-        print(request.POST)
-        return redirect('record')
+        text = list(request.POST.getlist('book'))
+        x = BookInfo.objects.get(book_name = text[0])
+
+        print(x)
+        y = User.objects.get(username=request.POST['user'])
+        print(x)
+        i = 0
+        for i in range(len(text)):
+            amount = list(request.POST.getlist('amount'))
+            total = list(request.POST.getlist('total'))
+
+        # user = request.POST.
+            data = {'user':y,
+                'book' : x,
+                'amount' : amount[i],
+                 'total' : total[i] }
+            form =BuyRecord(**data)
+            form.save()
+            i = i + 1
+
+        # print(text['book'][0])
+        # print(text['book'][1])
+        # print(text['book'][1])
+        # print(text['book'][2])
+        # print(len(text))
+        context= {}
+        return redirect('buy-list')
+
     else :
-        return render(request,'buylist1')
+        form = AddBuyRecord()
+        context = {'form':form }
+        return render(request,'buy/buylist.html',context )
 
 
 
@@ -49,7 +83,9 @@ def buy_list(request):
         buys.append(buy)
 
     context = { 'buys': buys,'t_price':t_price }
-    return render(request,'buy/buylist1.html',context)
+    return render(request,'buy/buylist.html',context)
+
+
 
 def check_out(request):
     del_cart(True)

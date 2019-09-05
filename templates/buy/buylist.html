@@ -2,7 +2,8 @@
 {% block content %}
 
 {% for x in buys %}
-<form class="form"  method="post">
+<form  method="post" action="/record/">
+{% csrf_token %}
 
 
 <div class="card">
@@ -23,8 +24,8 @@
 
 	<div class="img-wrap"><img src="{{ x.image.url }}" class="img-thumbnail img-sm"></div>
 	<figcaption class="media-body">
-
-		<h6 class="title text-truncate">{{ x.book_name }} </h6>
+    <input readonly type="text" name="user" value="{{user.username}}">
+		<h6 class="title text-truncate"><input type="text" name="book" value="{{ x.book_name }} readonly"> </h6>
 		<dl class="param param-inline small">
 
 		  <dt>{{ x.author }} </dt>
@@ -44,8 +45,8 @@
 	<td>
 		<div class="price-wrap">
 			<!-- <var class="price">USD 145</var> -->
-      <var class="price">  <input readonly value="{{ x.id }} taka"></var>
-      <input readonly value="{{t_price }} taka">
+      <var class="price">  <input type = "number" name = "amount" readonly value="{{ x. }} taka"></var>
+
 
 
 
@@ -61,16 +62,16 @@
 
 
 
-{% endfor %}
+
 
 </table>
 <!-- <input type="text" class="form-control input-sm pull-right" value="4"> -->
 <div class="form-group">
-    <input style="width:300px;float:right; text-align:center" type="text" class="form-control pull-right" readonly value="{{t_price }} taka">
+    <input style="width:300px;float:right; text-align:center" type="number" name="total"class="form-control pull-right" readonly value="{{t_price }} taka">
 </div>
-
-
-<a href="{% url 'checkout' %}" type="submit" class="btn btn-outline-success">Checkout</a>
+{% endfor %}
+<button type="submit" name="button">checkout</button>
+<!-- <a href="{% url 'checkout' %}" type="submit" class="btn btn-outline-success">Checkout</a> -->
 
 
 
