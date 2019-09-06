@@ -3,8 +3,10 @@
 {% for cat in category %}
 
 <ul class="list-group">
- <li class="list-group-item list-group-item-success">{{ cat.cat_name }}</li>
-
+<a href="{% url 'category-book' cat.id %}"> <li class="list-group-item list-group-item-success">{{ cat.cat_name }}      <a href="{% url 'delete-category' cat.id %}" class="btn btn-primary float-right">delete</a></li></a>
+{% if user.is_superuser  %}
+<!-- <a href="{% url 'delete-category' cat.id %}" class="btn btn-primary">delete</a> -->
+{% endif %}
  <!-- <li class="list-group-item list-group-item-secondary">Secondary item</li>
  <li class="list-group-item list-group-item-info">Info item</li>
  <li class="list-group-item list-group-item-warning">Warning item</li>
@@ -14,6 +16,9 @@
  <li class="list-group-item list-group-item-light">Light item</li> -->
 
 {% endfor %}
+<br>
+{% if user.is_superuser  %}
  <a href="{% url 'add-category' %}" class="btn btn-primary">add</a>
 </ul>
+{% endif %}
 {% endblock %}

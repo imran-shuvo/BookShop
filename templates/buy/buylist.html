@@ -24,8 +24,7 @@
 
 	<div class="img-wrap"><img src="{{ x.image.url }}" class="img-thumbnail img-sm"></div>
 	<figcaption class="media-body">
-    <input readonly type="text" name="user" value="{{user.username}}">
-		<h6 class="title text-truncate"><input type="text" name="book" value="{{ x.book_name }} readonly"> </h6>
+		<h6 class="title text-truncate"><input type="text" name="book" readonly value="{{ x.book_name }}"> </h6>
 		<dl class="param param-inline small">
 
 		  <dt>{{ x.author }} </dt>
@@ -45,7 +44,7 @@
 	<td>
 		<div class="price-wrap">
 			<!-- <var class="price">USD 145</var> -->
-      <var class="price">  <input type = "number" name = "amount" readonly value="{{ x. }} taka"></var>
+      <var class="price">  <input type = "number" name = "amount" readonly value="{{x.book_price }}"></var>
 
 
 
@@ -66,12 +65,15 @@
 
 </table>
 <!-- <input type="text" class="form-control input-sm pull-right" value="4"> -->
-<div class="form-group">
-    <input style="width:300px;float:right; text-align:center" type="number" name="total"class="form-control pull-right" readonly value="{{t_price }} taka">
-</div>
+
 {% endfor %}
-<button type="submit" name="button">checkout</button>
-<!-- <a href="{% url 'checkout' %}" type="submit" class="btn btn-outline-success">Checkout</a> -->
+<div class="form-group">
+    <input style="width:300px;float:right; text-align:center" type="number" name="total" class="form-control pull-right" value="{{ t_price }}">
+</div>
+
+<button type="submit" class="btn btn-outline-success" name="button">Checkout</button>
+
+
 
 
 

@@ -1,7 +1,8 @@
 from django import forms
 from .models import BuyRecord
+from django.contrib import admin
 
-class AddBuyRecord(object):
+class AddBuyRecord(forms.ModelForm):
     class Meta:
         model = BuyRecord
-        fields = ['user','book','amount','total']
+        fields = ['user','book']

@@ -14,7 +14,9 @@
      <p>price: {{ list.book_price }} tk</p>
 
     <a href="{% url 'book-detail' list.id %}" class="btn btn-primary">details</a>
+    {% if not user.is_superuser %}
     <a href="{% url 'buy' list.id %}" class="btn btn-primary">Add to Cart</a>
+    {% endif %}
     {% if user.is_superuser  %}
     <a href="{% url 'edit-book' list.id %}" class="btn btn-primary">Edit</a>
     <a href="{% url 'delete-book' list.id %}" class="btn btn-primary">delete</a>

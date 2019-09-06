@@ -11,6 +11,19 @@ def show_book_list(request):
     context = {'book_lists':book_lists}
     return render(request,'book/book_list.html',context)
 
+def show_category_book(request,cat_id):
+    category = BookCategory.objects.get(id = cat_id)
+    book_lists = BookInfo.objects.filter(book_cat=category)
+    # images = Upload.objects.filter(file_type='image')
+    # return render(request,'gallery.html',{"img":img, 'media_url':settings.MEDIA_URL})
+    context = {'book_lists':book_lists}
+    return render(request,'book/book_list.html',context)
+
+    # images = Upload.objects.filter(file_type='image')
+    # return render(request,'gallery.html',{"img":img, 'media_url':settings.MEDIA_URL})
+    context = {'category':category}
+    return render(request,'book/category.html',context)
+
 def book_details(request,book_id):
     details = BookInfo.objects.get(id = book_id)
     # images = Upload.objects.filter(file_type='image')
@@ -29,7 +42,10 @@ def add_category(request):
     context = { 'form':form }
 
     return render(request,'book/add_category.html',context)
-
+def delete_category(request,cat_id):
+    category = BookCategory.objects.get(id = cat_id)
+    category.delete()
+    return redirect('category')
 
 
 def show_category(request):

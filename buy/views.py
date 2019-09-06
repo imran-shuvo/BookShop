@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 # from  .models import BuyBook
 from book.models import BookInfo
 from .forms import AddBuyRecord
-from  .models import BuyRecord
+from  .models import BuyRecord,BuyTotal
+from django.contrib.auth.models import User
 
 from django.contrib.auth.models import User
 
@@ -15,41 +16,38 @@ mylist = []
 #     return 1
 
 def save_record(request):
-    print(request.POST)
 
     if request.method == 'POST':
         text = list(request.POST.getlist('book'))
         x = BookInfo.objects.get(book_name = text[0])
+        num_book = len(text)
+        if request.user.is_authenticated :
+            c = request.user.username
+            username = User.objects.get(username=c)
 
-        print(x)
-        y = User.objects.get(username=request.POST['user'])
-        print(x)
+        total= request.POST['total'] #total model price
+        tdata = {
+            'user':username,
+            'total':total,
+            'num_book':num_book,
+        }
+        tform = BuyTotal(**tdata)
+        tform.save()
         i = 0
-        for i in range(len(text)):
-            amount = list(request.POST.getlist('amount'))
-            total = list(request.POST.getlist('total'))
-
-        # user = request.POST.
-            data = {'user':y,
-                'book' : x,
-                'amount' : amount[i],
-                 'total' : total[i] }
+        for i in range(num_book):
+            book = BookInfo.objects.get(book_name = text[i])
+            data = {'user':username,
+                'book' : book,
+                 }
             form =BuyRecord(**data)
             form.save()
             i = i + 1
-
-        # print(text['book'][0])
-        # print(text['book'][1])
-        # print(text['book'][1])
-        # print(text['book'][2])
-        # print(len(text))
         context= {}
-        return redirect('buy-list')
+        return redirect('checkout')
 
     else :
-        form = AddBuyRecord()
-        context = {'form':form }
-        return render(request,'buy/buylist.html',context )
+
+        return redirect('buy-list')
 
 
 

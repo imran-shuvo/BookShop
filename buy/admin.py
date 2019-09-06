@@ -1,4 +1,13 @@
 from django.contrib import admin
-from .models import BuyRecord
+from .models import BuyRecord,BuyTotal
 
-admin.site.register(BuyRecord)
+class AdminBuyRecord(admin.ModelAdmin):
+    readonly_fields = ('date',)
+class AdminBuyTotal(admin.ModelAdmin):
+    readonly_fields = ('date',)
+
+
+
+
+admin.site.register(BuyRecord,AdminBuyRecord)
+admin.site.register(BuyTotal,AdminBuyTotal)

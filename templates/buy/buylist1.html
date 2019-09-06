@@ -5,15 +5,13 @@
 {% csrf_token %}
 <input type="text" name="user" value="{{user.username}}">
 <input type="text" name="book" value="{{x.book_name}}">
-<input type="number" name="amount" value="">
-<input type="number" name="total" value="{{t_price}}">
+<input type="number" oninput="x()" id="a" name="amount"  value="">
+<input type="number" name="amount1" value="{{x.book_price}}">
+
 <br>
 
-<script>
-
-
-</script>
 {% endfor %}
+<input type="number" name="total" value="{{t_price}}">
 <button type="submit" name="button">Save</button>
 
 </form>
